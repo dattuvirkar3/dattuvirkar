@@ -1,33 +1,27 @@
-// Smooth Scroll for Navigation
-document.querySelectorAll('.nav-links a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+// Scroll Reveal
+function revealOnScroll() {
+  const reveals = document.querySelectorAll(".reveal");
 
-// Scroll Animation Reveal
-const sections = document.querySelectorAll('.section');
+  reveals.forEach(element => {
+    const windowHeight = window.innerHeight;
+    const elementTop = element.getBoundingClientRect().top;
+    const revealPoint = 100;
 
-window.addEventListener('scroll', () => {
-    const triggerBottom = window.innerHeight * 0.85;
+    if (elementTop < windowHeight - revealPoint) {
+      element.classList.add("active");
+    }
+  });
+}
 
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
+window.addEventListener("scroll", revealOnScroll);
 
-        if(sectionTop < triggerBottom){
-            section.style.opacity = 1;
-            section.style.transform = "translateY(0)";
-        }
-    });
-});
-
-// Initial style
-sections.forEach(section => {
-    section.style.opacity = 0;
-    section.style.transform = "translateY(40px)";
-    section.style.transition = "all 0.8s ease";
+// Animate Skill Bars
+window.addEventListener("scroll", function () {
+  const skills = document.querySelectorAll(".progress span");
+  skills.forEach(skill => {
+    const position = skill.getBoundingClientRect().top;
+    if (position < window.innerHeight - 50) {
+      skill.style.width = skill.style.width;
+    }
+  });
 });
